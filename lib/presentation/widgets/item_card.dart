@@ -6,7 +6,6 @@ import '../../data/models/cart_response.dart';
 
 Widget itemCard({required CartEntity cart}) {
   return SizedBox(
-    height: 120,
     child: Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -14,6 +13,8 @@ Widget itemCard({required CartEntity cart}) {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
@@ -21,6 +22,7 @@ Widget itemCard({required CartEntity cart}) {
                   ? Image.network(
                       cart.imgUrl!,
                       width: 100,
+                errorBuilder: (_,__,___)=>Icon(Icons.image,size: 100,),
                     )
                   : Center(
                       child: Icon(Icons.image),
@@ -67,7 +69,9 @@ Widget itemCard({required CartEntity cart}) {
                     SizedBox(
                       width: 16,
                     ),
-                    Text(cart.quantity.toString()),
+                    SizedBox(
+                        width: 40,
+                        child: Text(cart.quantity.toString(),overflow: TextOverflow.ellipsis,)),
                     SizedBox(
                       width: 16,
                     ),
@@ -94,22 +98,35 @@ Widget itemCard({required CartEntity cart}) {
                     ),
                   ],
                 ),
+                SizedBox(height: 16,),
+                Text("Total Price: ${cart.totalPrice}"),
               ],
             ),
             Spacer(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Icon(
-                  Icons.more_vert,
-                ),
-                Text(
-                  "${cart.totalPrice!}\$",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+            SizedBox(
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
+                      IconButton(onPressed: (){}, icon: Icon(Icons.delete)),
+                    ],
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: 60,
+                    child: Text(
+                      "${cart.totalPrice!}\$",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

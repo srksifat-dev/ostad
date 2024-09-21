@@ -88,29 +88,29 @@ class CartModel extends CartEntity {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'cartID': this.cartID,
-      'productName': this.productName,
-      'productCode': this.productCode,
-      'imgUrl': this.imgUrl,
-      'unitPrice': this.unitPrice,
-      'quantity': this.quantity,
-      'totalPrice': this.totalPrice,
-      'createdDate': this.createdDate,
-    };
-  }
+  // Map<String, dynamic> toMap() {
+  //   return {
+  //     'cartID': this.cartID,
+  //     'productName': this.productName,
+  //     'productCode': this.productCode,
+  //     'imgUrl': this.imgUrl,
+  //     'unitPrice': this.unitPrice,
+  //     'quantity': this.quantity,
+  //     'totalPrice': this.totalPrice,
+  //     'createdDate': this.createdDate,
+  //   };
+  // }
 
   factory CartModel.fromJson(Map<String, dynamic> map) {
     return CartModel(
-      cartID: map['_id'] as String,
-      productName: map['ProductName'] as String,
-      productCode: map['ProductCode'] as String,
-      imgUrl: map['Img'] as String,
-      unitPrice: map['UnitPrice'] as String,
-      quantity: map['Qty'] as String,
-      totalPrice: map['TotalPrice'] as String,
-      createdDate: map['CreatedDate'] as String,
+      cartID: map['_id'] ?? "",
+      productName: map['ProductName'] ?? "",
+      productCode: map['ProductCode'] ?? "",
+      imgUrl: map['Img'] ?? "",
+      unitPrice: map['UnitPrice'] ?? "",
+      quantity: map['Qty'] ?? "",
+      totalPrice: map['TotalPrice'] ?? "",
+      createdDate: map['CreatedDate'] ?? "",
     );
   }
 

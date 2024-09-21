@@ -45,17 +45,19 @@ class _CartDataSource implements CartDataSource {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<List<dynamic>>(_options);
+    final _result = await _dio.fetch<Map<String,dynamic>>(_options);
     late List<CartModel> _value;
+    HttpResponse<List<CartModel>>? httpResponse;
     try {
-      _value = _result.data!
-          .map((dynamic i) => CartModel.fromJson(i as Map<String, dynamic>))
+      List<CartModel> _value = _result.data!["data"]
+          .map<CartModel>((dynamic i) => CartModel.fromJson(i as Map<String, dynamic>))
           .toList();
+      httpResponse = HttpResponse(_value, _result);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
     }
-    final httpResponse = HttpResponse(_value, _result);
+
     return httpResponse;
   }
 

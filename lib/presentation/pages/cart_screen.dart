@@ -24,7 +24,7 @@ class _CartScreenState extends State<CartScreen> {
             return const Center(child: CircularProgressIndicator(),);
           }
           if(state is CartError){
-            return Center(child: Text("Empty Cart!"),);
+            return Center(child: Text("${state.message}"),);
           }
           if (state is CartLoaded){
           return Padding(

@@ -9,6 +9,6 @@ part 'cart_datasource.g.dart';
 abstract class CartDataSource{
   factory CartDataSource(Dio dio) = _CartDataSource;
   
-  @GET("/${getAllCartProducts}")
+  @GET('/ReadProduct')
   Future<HttpResponse<List<CartModel>>> getCarts();
 }
