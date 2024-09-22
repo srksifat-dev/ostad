@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ostad/presentation/bloc/cart_event.dart';
 import 'package:ostad/presentation/pages/add_to_cart_screen.dart';
 import 'package:ostad/presentation/widgets/item_card.dart';
 
@@ -47,7 +48,7 @@ class _CartScreenState extends State<CartScreen> {
                       shrinkWrap: true,
                       itemCount: state.carts.length,
                       itemBuilder: (context, index) {
-                        return itemCard(cart: state.carts[index]);
+                        return itemCard(context: context, cart: state.carts[index]);
                       },
                       separatorBuilder: (_, __) => SizedBox(
                         height: 16,
@@ -89,6 +90,13 @@ class _CartScreenState extends State<CartScreen> {
           fontWeight: FontWeight.bold,
         ),
       ),
+      actions: [
+        IconButton(onPressed: (){
+          BlocProvider.of<CartBloc>(context).add(
+            GetCartEvent()
+          );
+        }, icon: Icon(Icons.refresh))
+      ],
       centerTitle: false,
     );
   }

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ostad/domain/entities/cart_entity.dart';
+import 'package:ostad/presentation/bloc/cart_event.dart';
 import 'package:ostad/presentation/bloc/cart_state.dart';
+import 'package:ostad/presentation/pages/update_cart_product.dart';
 
-import '../../data/models/cart_response.dart';
+import '../../data/models/get_cart_response.dart';
+import '../bloc/cart_bloc.dart';
 
-Widget itemCard({required CartEntity cart}) {
+Widget itemCard({required BuildContext context, required CartModel cart}) {
   return SizedBox(
     child: Card(
       shape: RoundedRectangleBorder(
@@ -34,11 +38,14 @@ Widget itemCard({required CartEntity cart}) {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  cart.productName!,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                SizedBox(
+                  width: 100,
+                  child: Text(
+                    cart.productName!,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -111,8 +118,16 @@ Widget itemCard({required CartEntity cart}) {
                 children: [
                   Row(
                     children: [
-                      IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
-                      IconButton(onPressed: (){}, icon: Icon(Icons.delete)),
+                      IconButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> UpdateCartProductScreen(cart: cart)));
+                      }, icon: Icon(Icons.edit)),
+                      IconButton(onPressed: (){
+                        BlocProvider.of<CartBloc>(context).add(
+                          DeleteCartEvent(
+                            cart: cart,
+                          ),
+                        );
+                      }, icon: Icon(Icons.delete)),
                     ],
                   ),
                   SizedBox(

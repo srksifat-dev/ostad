@@ -7,14 +7,15 @@ import 'package:ostad/presentation/bloc/cart_bloc.dart';
 import 'package:ostad/presentation/bloc/cart_event.dart';
 import 'package:uuid/uuid.dart';
 
-class AddToCartScreen extends StatefulWidget {
-  const AddToCartScreen({super.key});
+class UpdateCartProductScreen extends StatefulWidget {
+  final CartModel cart;
+  const UpdateCartProductScreen({required this.cart, super.key});
 
   @override
-  State<AddToCartScreen> createState() => _AddToCartScreenState();
+  State<UpdateCartProductScreen> createState() => _UpdateCartProductScreenState();
 }
 
-class _AddToCartScreenState extends State<AddToCartScreen> {
+class _UpdateCartProductScreenState extends State<UpdateCartProductScreen> {
   TextEditingController productNameController = TextEditingController();
   TextEditingController productCodeController = TextEditingController();
   TextEditingController imgUrlController = TextEditingController();
@@ -24,9 +25,12 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
 
   @override
   void initState() {
-    unitPriceController.text = "0";
-    quantityController.text = "0";
-    totalPriceController.text = "0";
+    productNameController.text = widget.cart.productName!;
+    productCodeController.text = widget.cart.productCode!;
+    imgUrlController.text = widget.cart.imgUrl!;
+    unitPriceController.text = widget.cart.unitPrice.toString();
+    quantityController.text = widget.cart.quantity.toString();
+    totalPriceController.text = widget.cart.totalPrice.toString();
   }
 
   @override
@@ -101,7 +105,7 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
                     onChanged: (val) {
                       setState(() {
                         totalPriceController.text = (double.parse(val) *
-                                double.parse(quantityController.text))
+                            double.parse(quantityController.text))
                             .toString();
                       });
                     },
@@ -122,7 +126,7 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
                     keyboardType: TextInputType.number,
                     onChanged: (val) {
                       totalPriceController.text = (double.parse(val) *
-                              double.parse(unitPriceController.text))
+                          double.parse(unitPriceController.text))
                           .toString();
                     },
                   ),
@@ -147,9 +151,11 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
               width: double.infinity,
               child: FilledButton(
                 onPressed: () {
+                  print(widget.cart.cartID);
                   BlocProvider.of<CartBloc>(context).add(
-                    AddCartEvent(
+                    UpdateCartEvent(
                       cart: CartModel(
+                        sId: widget.cart.cartID,
                         productName: productNameController.text,
                         productCode: productCodeController.text,
                         img: imgUrlController.text,
@@ -160,7 +166,7 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
                   );
                   Navigator.pop(context);
                 },
-                child: Text("Add to Cart"),
+                child: Text("Update Cart"),
               ),
             ),
           ],

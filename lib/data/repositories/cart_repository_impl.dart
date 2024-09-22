@@ -5,7 +5,9 @@ import 'package:dio/dio.dart';
 import 'package:ostad/core/failure/failures.dart';
 import 'package:ostad/core/resources/data_state.dart';
 import 'package:ostad/data/data_source/cart_datasource.dart';
-import 'package:ostad/data/models/cart_response.dart';
+import 'package:ostad/data/models/delete_cart_response.dart';
+import 'package:ostad/data/models/get_cart_response.dart';
+import 'package:ostad/data/models/update_cart_response.dart';
 import 'package:ostad/domain/entities/cart_entity.dart';
 import 'package:ostad/domain/repositories/cart_repository.dart';
 
@@ -44,7 +46,6 @@ class CartRepositoryImpl implements CartRepository {
     required String unitPrice,
   }) async {
     try {
-      print(img);
       await cartDataSource.addProduct(
         img: img,
         productCode: productCode,
@@ -56,5 +57,46 @@ class CartRepositoryImpl implements CartRepository {
     } on DioException catch (error) {
       print(error);
     }
+  }
+
+  @override
+  Future<UpdateCartResponse?> updateProduct({
+    required String id,
+    required String img,
+    required String productCode,
+    required String productName,
+    required String qty,
+    required String totalPrice,
+    required String unitPrice,
+  }) async {
+    UpdateCartResponse? response;
+    try {
+      response = await cartDataSource.updateProduct(
+        id: id,
+        img: img,
+        productCode: productCode,
+        productName: productName,
+        qty: qty,
+        totalPrice: totalPrice,
+        unitPrice: unitPrice,
+      );
+      return response;
+    } on DioException catch (error) {
+      print(error);
+    }
+    return response;
+  }
+
+  @override
+  Future<DeleteCartResponse?> deleteProduct({
+    required String id,
+  }) async {
+    DeleteCartResponse? response;
+    try {
+      response = await cartDataSource.deleteProduct(id: id);
+    } on DioException catch (error) {
+      print(error);
+    }
+    return response;
   }
 }

@@ -87,7 +87,7 @@ class _CartDataSource implements CartDataSource {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String,dynamic>>(_options);
-
+    late List<CartModel> _value;
     HttpResponse<List<CartModel>>? httpResponse;
     try {
       List<CartModel> _value = _result.data!["data"]
@@ -100,6 +100,87 @@ class _CartDataSource implements CartDataSource {
     }
 
     return httpResponse;
+  }
+
+  @override
+  Future<UpdateCartResponse> updateProduct({
+    required String id,
+    required String img,
+    required String productCode,
+    required String productName,
+    required String qty,
+    required String totalPrice,
+    required String unitPrice,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'Img': img,
+      'ProductCode': productCode,
+      'ProductName': productName,
+      'Qty': qty,
+      'TotalPrice': totalPrice,
+      'UnitPrice': unitPrice,
+    };
+    final _options = _setStreamType<UpdateCartResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/UpdateProduct/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late UpdateCartResponse _value;
+    try {
+      _value = UpdateCartResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<DeleteCartResponse> deleteProduct({required String id}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<DeleteCartResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/DeleteProduct/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late DeleteCartResponse _value;
+    try {
+      _value = DeleteCartResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
