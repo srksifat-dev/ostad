@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ostad/domain/entities/cart_entity.dart';
 import 'package:ostad/presentation/bloc/cart_event.dart';
-import 'package:ostad/presentation/bloc/cart_state.dart';
 import 'package:ostad/presentation/pages/update_cart_product.dart';
 
 import '../../data/models/get_cart_response.dart';
@@ -26,13 +24,13 @@ Widget itemCard({required BuildContext context, required CartModel cart}) {
                   ? Image.network(
                       cart.imgUrl!,
                       width: 100,
-                errorBuilder: (_,__,___)=>Icon(Icons.image,size: 100,),
+                errorBuilder: (_,__,___)=>const Icon(Icons.image,size: 100,),
                     )
-                  : Center(
+                  : const Center(
                       child: Icon(Icons.image),
                     ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
             Column(
@@ -42,13 +40,13 @@ Widget itemCard({required BuildContext context, required CartModel cart}) {
                   width: 100,
                   child: Text(
                     cart.productName!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Row(
@@ -58,28 +56,28 @@ Widget itemCard({required BuildContext context, required CartModel cart}) {
                       child: Container(
                         height: 30,
                         width: 30,
-                        child: Center(
-                          child: Icon(Icons.remove),
-                        ),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(32),
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 color: Colors.black12,
                                 offset: Offset(1, 1),
                                 blurRadius: 5,
                               ),
                             ]),
+                        child: const Center(
+                          child: Icon(Icons.remove),
+                        ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 16,
                     ),
                     SizedBox(
                         width: 40,
                         child: Text(cart.quantity.toString(),overflow: TextOverflow.ellipsis,)),
-                    SizedBox(
+                    const SizedBox(
                       width: 16,
                     ),
                     InkWell(
@@ -87,13 +85,10 @@ Widget itemCard({required BuildContext context, required CartModel cart}) {
                       child: Container(
                         height: 30,
                         width: 30,
-                        child: Center(
-                          child: Icon(Icons.add),
-                        ),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(32),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               color: Colors.black12,
                               offset: Offset(1, 1),
@@ -101,15 +96,18 @@ Widget itemCard({required BuildContext context, required CartModel cart}) {
                             ),
                           ],
                         ),
+                        child: const Center(
+                          child: Icon(Icons.add),
+                        ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 16,),
+                const SizedBox(height: 16,),
                 Text("Total Price: ${cart.totalPrice}"),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             SizedBox(
               height: 100,
               child: Column(
@@ -120,14 +118,14 @@ Widget itemCard({required BuildContext context, required CartModel cart}) {
                     children: [
                       IconButton(onPressed: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> UpdateCartProductScreen(cart: cart)));
-                      }, icon: Icon(Icons.edit)),
+                      }, icon: const Icon(Icons.edit)),
                       IconButton(onPressed: (){
                         BlocProvider.of<CartBloc>(context).add(
                           DeleteCartEvent(
                             cart: cart,
                           ),
                         );
-                      }, icon: Icon(Icons.delete)),
+                      }, icon: const Icon(Icons.delete)),
                     ],
                   ),
                   SizedBox(
@@ -135,7 +133,7 @@ Widget itemCard({required BuildContext context, required CartModel cart}) {
                     child: Text(
                       "${cart.totalPrice ?? "0"}\$",
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),

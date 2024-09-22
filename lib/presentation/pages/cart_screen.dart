@@ -22,9 +22,9 @@ class _CartScreenState extends State<CartScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => AddToCartScreen()));
+              .push(MaterialPageRoute(builder: (context) => const AddToCartScreen()));
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       body: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
@@ -35,7 +35,7 @@ class _CartScreenState extends State<CartScreen> {
           }
           if (state is CartError) {
             return Center(
-              child: Text("${state.message}"),
+              child: Text(state.message),
             );
           }
           if (state is CartLoaded) {
@@ -50,24 +50,24 @@ class _CartScreenState extends State<CartScreen> {
                       itemBuilder: (context, index) {
                         return itemCard(context: context, cart: state.carts[index]);
                       },
-                      separatorBuilder: (_, __) => SizedBox(
+                      separatorBuilder: (_, __) => const SizedBox(
                         height: 16,
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   FilledButton(
-                    style: ButtonStyle(
+                    style: const ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(Colors.red),
                     ),
                     onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text(
                               "Congratulations! You have checkout successfully.")));
                     },
-                    child: Center(
+                    child: const Center(
                       child: Text("CHECK OUT"),
                     ),
                   ),
@@ -84,7 +84,7 @@ class _CartScreenState extends State<CartScreen> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      title: Text(
+      title: const Text(
         "My Bag",
         style: TextStyle(
           fontWeight: FontWeight.bold,
@@ -93,9 +93,9 @@ class _CartScreenState extends State<CartScreen> {
       actions: [
         IconButton(onPressed: (){
           BlocProvider.of<CartBloc>(context).add(
-            GetCartEvent()
+            const GetCartEvent()
           );
-        }, icon: Icon(Icons.refresh))
+        }, icon: const Icon(Icons.refresh))
       ],
       centerTitle: false,
     );

@@ -87,7 +87,6 @@ class _CartDataSource implements CartDataSource {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String,dynamic>>(_options);
-    late List<CartModel> _value;
     HttpResponse<List<CartModel>>? httpResponse;
     try {
       List<CartModel> _value = _result.data!["data"]

@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ostad/core/constants/strings.dart';
 import 'package:ostad/core/resources/data_state.dart';
 import 'package:ostad/domain/use_cases/add_product.dart';
 import 'package:ostad/domain/use_cases/delete_product.dart';
@@ -20,7 +19,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     required this.addProductUseCase,
     required this.updateProductUseCase,
     required this.deleteProductUseCase,
-  }) : super(CartInitialState()) {
+  }) : super(const CartInitialState()) {
     on<GetCartEvent>(onGetCarts);
     on<AddCartEvent>(onAddCart);
     on<UpdateCartEvent>(onUpdateCart);
@@ -43,7 +42,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         emit(CartError(message: dataState.error!.toString()));
       }
     } catch (e) {
-      print(e);
     }
   }
 
@@ -82,7 +80,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       }
 
     } catch (e) {
-      print(e);
     }
   }
 
@@ -105,7 +102,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       }
 
     } catch (e) {
-      print(e);
     }
   }
 }

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ostad/core/bloc/global_bloc_providers.dart';
 import 'package:ostad/data/models/get_cart_response.dart';
-import 'package:ostad/domain/entities/cart_entity.dart';
 import 'package:ostad/presentation/bloc/cart_bloc.dart';
 import 'package:ostad/presentation/bloc/cart_event.dart';
-import 'package:uuid/uuid.dart';
 
 class UpdateCartProductScreen extends StatefulWidget {
   final CartModel cart;
@@ -25,6 +22,7 @@ class _UpdateCartProductScreenState extends State<UpdateCartProductScreen> {
 
   @override
   void initState() {
+    super.initState();
     productNameController.text = widget.cart.productName!;
     productCodeController.text = widget.cart.productCode!;
     imgUrlController.text = widget.cart.imgUrl!;
@@ -48,7 +46,7 @@ class _UpdateCartProductScreenState extends State<UpdateCartProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add to Cart"),
+        title: const Text("Add to Cart"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -63,7 +61,7 @@ class _UpdateCartProductScreenState extends State<UpdateCartProductScreen> {
                 labelText: "Product Name",
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             TextFormField(
@@ -75,7 +73,7 @@ class _UpdateCartProductScreenState extends State<UpdateCartProductScreen> {
                 labelText: "Product Code",
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             TextFormField(
@@ -87,7 +85,7 @@ class _UpdateCartProductScreenState extends State<UpdateCartProductScreen> {
                 labelText: "Image Url",
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Row(
@@ -111,7 +109,7 @@ class _UpdateCartProductScreenState extends State<UpdateCartProductScreen> {
                     },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Expanded(
@@ -133,7 +131,7 @@ class _UpdateCartProductScreenState extends State<UpdateCartProductScreen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             TextFormField(
@@ -146,12 +144,11 @@ class _UpdateCartProductScreenState extends State<UpdateCartProductScreen> {
                 labelText: "Total Price",
               ),
             ),
-            Spacer(),
+            const Spacer(),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
                 onPressed: () {
-                  print(widget.cart.cartID);
                   BlocProvider.of<CartBloc>(context).add(
                     UpdateCartEvent(
                       cart: CartModel(
@@ -166,7 +163,7 @@ class _UpdateCartProductScreenState extends State<UpdateCartProductScreen> {
                   );
                   Navigator.pop(context);
                 },
-                child: Text("Update Cart"),
+                child: const Text("Update Cart"),
               ),
             ),
           ],

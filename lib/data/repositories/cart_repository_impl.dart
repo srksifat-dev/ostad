@@ -1,14 +1,11 @@
 import 'dart:io';
 
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:ostad/core/failure/failures.dart';
 import 'package:ostad/core/resources/data_state.dart';
 import 'package:ostad/data/data_source/cart_datasource.dart';
 import 'package:ostad/data/models/delete_cart_response.dart';
 import 'package:ostad/data/models/get_cart_response.dart';
 import 'package:ostad/data/models/update_cart_response.dart';
-import 'package:ostad/domain/entities/cart_entity.dart';
 import 'package:ostad/domain/repositories/cart_repository.dart';
 
 class CartRepositoryImpl implements CartRepository {
@@ -54,8 +51,7 @@ class CartRepositoryImpl implements CartRepository {
         totalPrice: totalPrice,
         unitPrice: unitPrice,
       );
-    } on DioException catch (error) {
-      print(error);
+    } on DioException {
     }
   }
 
@@ -81,8 +77,7 @@ class CartRepositoryImpl implements CartRepository {
         unitPrice: unitPrice,
       );
       return response;
-    } on DioException catch (error) {
-      print(error);
+    } on DioException {
     }
     return response;
   }
@@ -94,8 +89,7 @@ class CartRepositoryImpl implements CartRepository {
     DeleteCartResponse? response;
     try {
       response = await cartDataSource.deleteProduct(id: id);
-    } on DioException catch (error) {
-      print(error);
+    } on DioException {
     }
     return response;
   }

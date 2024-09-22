@@ -6,12 +6,12 @@ class AddToCartResponse {
 
   AddToCartResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -51,15 +51,15 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ProductName'] = this.productName;
-    data['ProductCode'] = this.productCode;
-    data['Img'] = this.img;
-    data['UnitPrice'] = this.unitPrice;
-    data['Qty'] = this.qty;
-    data['TotalPrice'] = this.totalPrice;
-    data['CreatedDate'] = this.createdDate;
-    data['_id'] = this.sId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['ProductName'] = productName;
+    data['ProductCode'] = productCode;
+    data['Img'] = img;
+    data['UnitPrice'] = unitPrice;
+    data['Qty'] = qty;
+    data['TotalPrice'] = totalPrice;
+    data['CreatedDate'] = createdDate;
+    data['_id'] = sId;
     return data;
   }
 }

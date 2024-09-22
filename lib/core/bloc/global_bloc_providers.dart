@@ -5,6 +5,6 @@ import 'package:ostad/presentation/bloc/cart_event.dart';
 
 class GlobalBlocProviders{
   dynamic providers = [
-    BlocProvider(create: (_)=> di.sl<CartBloc>()..add(GetCartEvent())),
+    BlocProvider(create: (_)=> di.sl<CartBloc>()..add(const GetCartEvent())),
   ];
 }

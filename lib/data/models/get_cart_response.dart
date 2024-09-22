@@ -11,14 +11,14 @@ class GetCartResponse {
     if (json['data'] != null) {
       data = <CartModel>[];
       json['data'].forEach((v) {
-        data!.add(new CartModel.fromJson(v));
+        data!.add(CartModel.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -29,22 +29,17 @@ class GetCartResponse {
 class CartModel extends CartEntity {
   CartModel({
     String? sId,
-    required String? productName,
-    required String? productCode,
+    required super.productName,
+    required super.productCode,
     required String? img,
-    required String? unitPrice,
+    required super.unitPrice,
     required String? qty,
-    required String? totalPrice,
-    String? createdDate,
+    required super.totalPrice,
+    super.createdDate,
   }) : super(
           cartID: sId,
-          productName: productName,
-          productCode: productCode,
           imgUrl: img,
-          unitPrice: unitPrice,
           quantity: qty,
-          totalPrice: totalPrice,
-          createdDate: createdDate,
         );
 
   CartModel.fromJson(Map<String, dynamic> json) {
@@ -59,15 +54,15 @@ class CartModel extends CartEntity {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.cartID;
-    data['ProductName'] = this.productName;
-    data['ProductCode'] = this.productCode;
-    data['Img'] = this.imgUrl;
-    data['UnitPrice'] = this.unitPrice;
-    data['Qty'] = this.quantity;
-    data['TotalPrice'] = this.totalPrice;
-    data['CreatedDate'] = this.createdDate;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = cartID;
+    data['ProductName'] = productName;
+    data['ProductCode'] = productCode;
+    data['Img'] = imgUrl;
+    data['UnitPrice'] = unitPrice;
+    data['Qty'] = quantity;
+    data['TotalPrice'] = totalPrice;
+    data['CreatedDate'] = createdDate;
     return data;
   }
 }

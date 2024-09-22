@@ -1,5 +1,4 @@
 import 'package:ostad/data/models/get_cart_response.dart';
-import 'package:ostad/domain/entities/cart_entity.dart';
 
 abstract class CartEvent{
   const CartEvent();

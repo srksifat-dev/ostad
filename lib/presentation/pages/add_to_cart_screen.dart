@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ostad/core/bloc/global_bloc_providers.dart';
 import 'package:ostad/data/models/get_cart_response.dart';
-import 'package:ostad/domain/entities/cart_entity.dart';
 import 'package:ostad/presentation/bloc/cart_bloc.dart';
 import 'package:ostad/presentation/bloc/cart_event.dart';
-import 'package:uuid/uuid.dart';
 
 class AddToCartScreen extends StatefulWidget {
   const AddToCartScreen({super.key});
@@ -24,6 +21,7 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
 
   @override
   void initState() {
+    super.initState();
     unitPriceController.text = "0";
     quantityController.text = "0";
     totalPriceController.text = "0";
@@ -44,7 +42,7 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add to Cart"),
+        title: const Text("Add to Cart"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -59,7 +57,7 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
                 labelText: "Product Name",
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             TextFormField(
@@ -71,7 +69,7 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
                 labelText: "Product Code",
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             TextFormField(
@@ -83,7 +81,7 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
                 labelText: "Image Url",
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Row(
@@ -107,7 +105,7 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
                     },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Expanded(
@@ -129,7 +127,7 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             TextFormField(
@@ -142,7 +140,7 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
                 labelText: "Total Price",
               ),
             ),
-            Spacer(),
+            const Spacer(),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -160,7 +158,7 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
                   );
                   Navigator.pop(context);
                 },
-                child: Text("Add to Cart"),
+                child: const Text("Add to Cart"),
               ),
             ),
           ],

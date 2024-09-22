@@ -1,7 +1,6 @@
 import 'package:ostad/data/models/delete_cart_response.dart';
 import 'package:ostad/data/models/get_cart_response.dart';
 import 'package:ostad/data/models/update_cart_response.dart';
-import 'package:ostad/domain/entities/cart_entity.dart';
 
 import '../../core/resources/data_state.dart';
 
