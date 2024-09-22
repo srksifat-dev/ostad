@@ -118,7 +118,7 @@ Widget itemCard({required CartEntity cart}) {
                   SizedBox(
                     width: 60,
                     child: Text(
-                      "${cart.totalPrice!}\$",
+                      "${cart.totalPrice ?? "0"}\$",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,

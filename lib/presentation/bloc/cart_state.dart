@@ -14,6 +14,10 @@ class CartLoading extends CartState{
   const CartLoading();
 }
 
+class CartAdded extends CartState{
+  const CartAdded();
+}
+
 class CartLoaded extends CartState{
   final List<CartEntity> carts;
   const CartLoaded({required this.carts});

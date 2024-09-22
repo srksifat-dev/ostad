@@ -33,4 +33,28 @@ class CartRepositoryImpl implements CartRepository {
       return DataFailed(error);
     }
   }
+
+  @override
+  Future<void> addProduct({
+    required String img,
+    required String productCode,
+    required String productName,
+    required String qty,
+    required String totalPrice,
+    required String unitPrice,
+  }) async {
+    try {
+      print(img);
+      await cartDataSource.addProduct(
+        img: img,
+        productCode: productCode,
+        productName: productName,
+        qty: qty,
+        totalPrice: totalPrice,
+        unitPrice: unitPrice,
+      );
+    } on DioException catch (error) {
+      print(error);
+    }
+  }
 }

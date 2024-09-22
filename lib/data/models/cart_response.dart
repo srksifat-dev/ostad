@@ -21,25 +21,27 @@ class CartResponse{
 
 
 class CartModel extends CartEntity {
-  String? cartID;
-  String? productName;
-  String? productCode;
-  String? imgUrl;
-  String? unitPrice;
-  String? quantity;
-  String? totalPrice;
-  String? createdDate;
+
 
   CartModel({
-    this.cartID,
-    this.productName,
-    this.productCode,
-    this.imgUrl,
-    this.unitPrice,
-    this.quantity,
-    this.totalPrice,
-    this.createdDate,
-  });
+    String? cartID,
+    String? productName,
+    String? productCode,
+    String? imgUrl,
+    String? unitPrice,
+    String? quantity,
+    String? totalPrice,
+    String? createdDate,
+  }):super(
+    cartID: cartID,
+    productName: productName,
+    productCode: productCode,
+    imgUrl: imgUrl,
+    unitPrice: unitPrice,
+    quantity: quantity,
+    totalPrice: totalPrice,
+    createdDate: createdDate,
+  );
 
   @override
   bool operator ==(Object other) =>
